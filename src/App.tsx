@@ -160,8 +160,19 @@ export default function App() {
       });
 
       if (!response.ok) {
-        const errJson = await response.json().catch(() => ({}));
-        throw new Error(errJson.error || `HTTP error ${response.status}`);
+        let errorMsg = `HTTP error ${response.status}`;
+        try {
+          const errJson = await response.json();
+          if (errJson?.error) {
+            errorMsg = errJson.error;
+          }
+        } catch {
+          if (response.status === 404) {
+            errorMsg =
+              "HTTP 404: /api/chat-stream was not found. Ensure the /api directory and vercel.json are deployed.";
+          }
+        }
+        throw new Error(errorMsg);
       }
 
       const reader = response.body?.getReader();
