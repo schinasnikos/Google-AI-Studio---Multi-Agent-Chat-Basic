@@ -1,0 +1,6 @@
+{
+  "name": "Multi-Agent Chat Studio",
+  "description": "Real-time collaborative chat room with multiple customizable AI agents and human participants powered by Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
